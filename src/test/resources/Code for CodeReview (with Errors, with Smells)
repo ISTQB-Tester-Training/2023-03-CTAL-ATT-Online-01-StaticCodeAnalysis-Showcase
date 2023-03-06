@@ -77,7 +77,7 @@ public class TimePairSCA {
         return pauseTime;
     }
 
-    public class TimePairSCAException extends RuntimeException {
+    public static class TimePairSCAException extends RuntimeException {
         private final String message;
         private final Long messageNr;
 
