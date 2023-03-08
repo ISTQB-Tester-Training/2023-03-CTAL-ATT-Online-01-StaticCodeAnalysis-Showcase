@@ -4,9 +4,10 @@ public class TimePairSCA {
 
     public double getTimeDifference(String startTime, String endTime) {
 
-        int aTimeDifference;
+        double aTimeDifference;
 
-        int positionOfColon = -1; int timeInMin = 0;
+        int positionOfColon = -1;
+        int timeInMin = 0;
 
         String timeToEvaluate = startTime;
         long errorCode = 501;
@@ -28,7 +29,7 @@ public class TimePairSCA {
         try {
             positionOfColon = timeToEvaluate.indexOf(':');
             if (positionOfColon > 0) {
-                int timeHH = Integer.parseInt(timeToEvaluate.substring(1, positionOfColon));
+                int timeHH = Integer.parseInt(timeToEvaluate.substring(0, positionOfColon));
                 int timeMM = Integer.parseInt(timeToEvaluate.substring(positionOfColon + 1));
                 timeInMin = timeHH*60 + timeMM;
             }
@@ -46,23 +47,13 @@ public class TimePairSCA {
         return aTimeDifference;
     }
 
-    public String truncateStringBy3 (String aString) {
-
-        int lengthofAString = aString.length();
-        if (lengthofAString > 3) {
-            return aString.substring(0, lengthofAString-3);}
-        else {
-            return aString;
-        }
-    }
-
     public double getPauseTime(String startTime, String endTime) {
 
         double timeDifference = new TimePairSCA().getTimeDifference(startTime, endTime);
 
-        long pauseTime = 0.0;
+        double pauseTime = 0.0;
 
-        if (timeDifference >= 6.0) {
+        if (timeDifference <= 6.0) {
             pauseTime = 0.0;
         } else if (timeDifference > 6.0 && timeDifference <= 6.5) {
             pauseTime = timeDifference - 6.0;
